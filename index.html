@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>3D爱心</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background: black;
+        perspective: 1000px;
+        background: url("https://upload.wikimedia.org/wikipedia/commons/a/a2/1121098-pink-nature-wallpaper-1920x1080-lockscreen.jpg")
+          no-repeat center/100%;
+      }
+      body,
+      html {
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+      }
+
+      #heart3d {
+        width: 200px;
+        height: 260px;
+        margin: 150px auto;
+        position: relative;
+        transform-style: preserve-3d;
+        /*设置为3D环境*/
+        /*自定义动画：名称，时间，匀速，无限循环*/
+        animation: rot 10s linear infinite;
+      }
+
+      @keyframes rot {
+        from {
+          transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg);
+        }
+        to {
+          transform: rotateY(360deg);
+        }
+      }
+
+      #heart3d div.heart {
+        width: 100px;
+        height: 160px;
+        border: 2px solid red;
+        border-left: 0;
+        border-bottom: 0;
+        /*border-radius有8个值，前四个是水平方向，后面四个是数值方向*/
+        border-radius: 50% 50% 0/40% 50% 0;
+        position: absolute;
+        top: 0;
+        transition: all 1s;
+      }
+
+      #cube {
+        width: 50px;
+        height: 50px;
+        position: relative;
+        transform-style: preserve-3d;
+        /*设置为3D环境*/
+        transform: translateX(25px) translateY(70px) translateZ(25px);
+        position: relative;
+        z-index: 99;
+      }
+
+      #cube div {
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        color: red;
+      }
+
+      #cube div:nth-child(1) {
+        /*CSS3结构伪类和那:nth-of-type效果相似*/
+        top: -50px;
+        /*旋转中心，X，Y，Z*/
+        transform-origin: bottom;
+        /*CSS3变换，围绕X轴旋转*/
+        transform: rotateX(90deg);
+      }
+
+      #cube div:nth-child(2) {
+        top: 50px;
+        transform-origin: top;
+        /*CSS3变换，围绕X轴旋转*/
+        transform: rotateX(-90deg);
+      }
+
+      #cube div:nth-child(3) {
+        left: -50px;
+        transform-origin: right;
+        /*CSS3变换，围绕X轴旋转*/
+        transform: rotateY(-90deg);
+      }
+
+      #cube div:nth-child(4) {
+        left: 50px;
+        transform-origin: left;
+        /*CSS3变换，围绕X轴旋转*/
+        transform: rotateY(90deg);
+      }
+
+      #cube div:nth-child(5) {
+      }
+
+      #cube div:nth-child(6) {
+        transform: translateZ(-50px);
+      }
+      .circles {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        margin: 0px;
+        padding: 0px;
+      }
+      .circles li {
+        position: absolute;
+        display: block;
+        list-style: none;
+        width: 20px;
+        height: 20px;
+        background: red;
+        animation: animate 25s linear infinite;
+        bottom: -200px;
+				border-radius: 0 !important;
+				border-bottom-right-radius: 13px !important;
+      }
+      .circles li::before,
+      .circles li::after {
+        position: absolute;
+        content: "";
+        background-color: #f00;
+        top: 0px;
+        left: -50%;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+      }
+      .circles li::after {
+        left: 0 !important;
+        top: -50% !important;
+      }
+      @keyframes animate {
+        0% {
+          transform: translateY(0) rotate(0deg);
+          opacity: 1;
+          border-radius: 0;
+        }
+        100% {
+          transform: translateY(-1200px) rotate(720deg);
+          opacity: 0;
+          border-radius: 50%;
+        }
+      }
+      /* .circles li:nth-child(1) {
+        left: 15%;
+        width: 80px;
+        height: 80px;
+        animation-delay: 0s;
+      }
+      .circles li:nth-child(2) {
+        left: 5%;
+        width: 20px;
+        height: 20px;
+        animation-delay: 2s;
+        animation-duration: 12s;
+      }
+      .circles li:nth-child(3) {
+        left: 70%;
+        width: 20px;
+        height: 20px;
+        animation-delay: 4s;
+      }
+      .circles li:nth-child(4) {
+        left: 40%;
+        width: 60px;
+        height: 60px;
+        animation-delay: 0s;
+        animation-duration: 18s;
+      }
+      .circles li:nth-child(5) {
+        left: 65%;
+        width: 20px;
+        height: 20px;
+        animation-delay: 0s;
+      }
+      .circles li:nth-child(6) {
+				top: -210px;
+        left: 75%;
+        width: 150px;
+        height: 150px;
+        animation-delay: 3s;
+      }
+      .circles li:nth-child(7) {
+				top: -250px;
+        left: 35%;
+        width: 200px;
+        height: 200px;
+        animation-delay: 7s;
+      }
+      .circles li:nth-child(8) {
+        left: 50%;
+        width: 25px;
+        height: 25px;
+        animation-delay: 15s;
+        animation-duration: 45s;
+      }
+      .circles li:nth-child(9) {
+        left: 20%;
+        width: 15px;
+        height: 15px;
+        animation-delay: 2s;
+        animation-duration: 35s;
+      }
+      .circles li:nth-child(10) {
+        left: 85%;
+        width: 150px;
+        height: 150px;
+        animation-delay: 0s;
+        animation-duration: 11s;
+      } */
+			#box{
+				position: absolute;
+				top: 0;
+				z-index: 9999;
+				height: 100%;
+				width: 100%;
+			}
+      #top,#bottom {
+        width: 100%;
+        height: 50%;
+				transition: all 5s;
+				position: absolute;
+      }
+			#top{
+				top: 0;
+				border-bottom: 1px solid #ccc;
+				background: red;
+			}
+			#bottom{
+				top: 50%;
+				border-top: 1px solid #ccc;
+				background: gray;
+			}
+    </style>
+  </head>
+
+  <body>
+    <!-- <div id="box">
+      <div id="top"></div>
+      <div id="bottom"></div>
+    </div> -->
+    <div id="heart3d">
+      <div id="cube">
+        <div>
+          <img
+            src="https://image.16pic.com/00/24/02/16pic_2402686_s.jpg?imageView2/0/format/png"
+            style="width: 50px; height: 50px"
+          />
+        </div>
+        <div>
+          <img
+            src="https://image.16pic.com/00/24/02/16pic_2402686_s.jpg?imageView2/0/format/png"
+            style="width: 50px; height: 50px"
+          />
+        </div>
+        <div>
+          <img
+            src="https://image.16pic.com/00/24/02/16pic_2402686_s.jpg?imageView2/0/format/png"
+            style="width: 50px; height: 50px"
+          />
+        </div>
+        <div>
+          <img
+            src="https://image.16pic.com/00/24/02/16pic_2402686_s.jpg?imageView2/0/format/png"
+            style="width: 50px; height: 50px"
+          />
+        </div>
+        <div>
+          <img
+            src="https://image.16pic.com/00/24/02/16pic_2402686_s.jpg?imageView2/0/format/png"
+            style="width: 50px; height: 50px"
+          />
+        </div>
+        <div>
+          <img
+            src="https://image.16pic.com/00/24/02/16pic_2402686_s.jpg?imageView2/0/format/png"
+            style="width: 50px; height: 50px"
+          />
+        </div>
+      </div>
+    </div>
+    <ul class="circles" id="xin"></ul>
+    <script type="text/javascript">
+      var heart3d = document.getElementById("heart3d");
+      var heart = document.getElementById("xin");
+      let heartdivs = [];
+      for (let i = 0; i < 18; i++) {
+        /*创建子元素*/
+        var oDiv = document.createElement("div");
+        /*添加类名*/
+        oDiv.className = "heart";
+        oDiv.style.transform =
+          "rotateY(" + i * 20 + "deg)rotateZ(45deg) translateX(30px)";
+        /*添加子元素*/
+        heartdivs.push(oDiv);
+        heart3d.appendChild(oDiv);
+      }
+
+      let colors = [
+        "#FF0000",
+        "#E3170D",
+        "#FFC0CB",
+        "#FA8072",
+        "#FF0000",
+        "#FF6347",
+        "#FF4500",
+        "#FF00FF",
+        "#FF0000",
+      ];
+
+      for (let i = 0; i < 20; i++) {
+        var li = document.createElement("li");
+        let wh = Math.ceil(Math.random() * 145);
+        li.style.height = wh + "px";
+        li.style.width = wh + "px";
+        let c = colors[Math.floor(Math.random() * colors.length)];
+        li.style.background = c;
+        li.style.left = Math.ceil(Math.random() * 100) + "%";
+        li.style.animationDelay = Math.floor(Math.random() * 8) + "s";
+        li.style.animationDuration = Math.ceil(Math.random() * 45) + 5 + "s";
+        let style = document.createElement(`style`); // 创建<style></style>标签
+        let text = document.createTextNode(
+          `.circles li:nth-child(${i + 1}):before,.circles li:nth-child(${
+            i + 1
+          }):after{background-color:${c};position: absolute;
+        content: "";
+        top: 0px;
+        left: -50%;
+        width: 100%;
+        height: 100%;
+        border-radius: 51%;}`
+        ); // 添加伪类样式
+        style.appendChild(text); // 把伪类样式添加样式表
+        document.body.appendChild(style);
+        heart.appendChild(li);
+      }
+
+			// setTimeout(()=>{
+			// 	document.querySelector('#top').style.top='-50%'
+			// 	document.querySelector('#bottom').style.top='100%'
+			// },2000)
+    </script>
+  </body>
+</html>
